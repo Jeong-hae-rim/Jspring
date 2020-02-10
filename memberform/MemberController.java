@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import vo.MemberVO;
@@ -13,9 +14,8 @@ import vo.MemberVO;
 @Controller
 public class MemberController {	
 
-	@RequestMapping("/member1")
+	@RequestMapping(value = "/member1", method = RequestMethod.POST)
 	public ModelAndView proc(MemberVO vo) {
-		
 		
 		ModelAndView mav = new ModelAndView();
 		String name = vo.getName();
