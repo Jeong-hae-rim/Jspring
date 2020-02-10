@@ -24,10 +24,10 @@ public class MemberController {
 		String passwd = vo.getPasswd();
 
 		System.out.println(name);
-		if(name=="") name="없음";
-		if(phone=="") phone="없음";
-		if(id=="") id="없음";
-		if(passwd=="") passwd="없음";
+		if(name=="") vo.setName("없음");;
+		if(phone=="") vo.setPhone("없음");
+		if(id=="") vo.setId("없음");
+		if(passwd=="") vo.setPasswd("없음");
 		
 		mav.addObject("name", name);
 		mav.addObject("phone", phone);
