@@ -25,10 +25,10 @@ public class EduController {
 	@RequestMapping(value = "/eduform1", method = {RequestMethod.GET, RequestMethod.POST})
 	 
 		public ModelAndView myPost( 
-				@RequestParam("myid") String id,
+				@RequestParam("id") String id,
 			    @RequestParam("score") int score) {
 		    ModelAndView mav = new ModelAndView();
-		    mav.addObject("myid", id);
+		    mav.addObject("id", id);
 			switch(score/10) {
 			case 10:
 			case 9: 
