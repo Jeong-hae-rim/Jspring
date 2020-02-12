@@ -31,7 +31,7 @@ public class MyTeamController {
 		my.setName("황지원");
 		my.setNicName("에이스");
 		list.add(my);
-		vo.setTeamName("각개격파");
+		vo.setTeamName("잉력시장");
 		vo.setTeamMember(list);
 		return vo;
 	}	
@@ -54,7 +54,7 @@ public class MyTeamController {
 		my.setName("황지원");
 		my.setNicName("에이스");
 		list.add(my);
-		vo.setTeamName("각개격파");
+		vo.setTeamName("잉력시장");
 		vo.setTeamMember(list);
 		return vo;
 	}	
