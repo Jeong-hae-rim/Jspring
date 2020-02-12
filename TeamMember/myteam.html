@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>my team</title>
+<link href="https://fonts.googleapis.com/css?family=Hi+Melody:400"
+	  rel="stylesheet">
+<style>
+* {
+	font-family: "Hi Melody";
+	font-size : 40px;
+	text-align : center;
+}
+
+hr {
+	border: none;
+	border-top: 2px solid #1a0f00;
+	color: #fff;
+	background-color: #fff;
+	height: 1px;
+	width: 80%;
+	margin: auto;
+}
+
+div {
+
+    border: 2px solid #ffb3ff;
+    border-radius : 20px;
+
+}
+</style>
+</head>
+<body>
+	<h1>우리 팀 소개</h1>
+	<hr>
+	<br>
+	<button onclick="f1();" style="font-size : 20px;">우리 팀명</button>
+	<button onclick="f2();" style="font-size : 20px;">우리 팀원</button>
+    <br>
+    <br>
+	<div id="output"
+		style="width: 500px; margin: 10px auto; text-align: center; font-size : 30px;"></div>
+
+	<script type="text/javascript">
+		function f1() {
+			var request = new XMLHttpRequest();
+			request.onload = function(event) {
+				if (request.status == 200) {
+					var str = request.responseText;
+					var target = document.getElementById('output');
+					var json = JSON.parse(str);
+					target.innerHTML = json.teamName;
+				}
+			};
+			request.open('GET', '/springedu/body/json5/{id}', true);
+			request.send();
+		}
+
+		function f2() {
+			var request = new XMLHttpRequest();
+			request.onload = function(event) {
+				if (request.status == 200) {
+					var str = request.responseText;
+					var target = document.getElementById('output');
+					var json = JSON.parse(str);
+					console.log(json);
+					target.innerHTML = "팀원 : " + json.teamMember[0].name + "("
+							                   + json.teamMember[0].nicName + ")" + "<br>"
+							         + "팀원 : " + json.teamMember[1].name + "("
+							                    + json.teamMember[1].nicName + ")" + "<br>"
+							         + "팀원 : " + json.teamMember[2].name + "("
+							                    + json.teamMember[2].nicName + ")" + "<br>"
+					console.log(target);
+				}
+			};
+			request.open('GET', '/springedu/body/json5/{id}', true);
+			request.send();
+		}
+	</script>
+
+</body>
+</html>
