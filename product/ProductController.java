@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import vo.ProductVO;
 import vo.CountVO;
@@ -37,46 +38,25 @@ public class ProductController {
 		return new ProductVO();
 	}
 	
-	@RequestMapping(value="/product1")
-	public void handle(@ModelAttribute("pid1")ProductVO vo1, 
-		      @ModelAttribute("pid2")ProductVO vo2, 
-		      @ModelAttribute("pid3")ProductVO vo3, int num1, int num2, int num3) {
-		
-		vo1.setApple(num1);
-		vo2.setBanana(num2);
-		vo3.setHanra(num3);
-		System.out.println("handle() : "+ 
-			      vo1.getApple() + " : " + vo2.getBanana() + " : " + vo3.getHanra());
-		System.out.println("=============================");
-		
+	@RequestMapping(value="/product")
+	public void handle(@ModelAttribute("p001")ProductVO vo1, 
+		      @ModelAttribute("p002")ProductVO vo2, 
+		      @ModelAttribute("p003")ProductVO vo3, String list, int num1, int num2, int num3) {
+		if(list == "p001") {
+			vo1.setApple(num1);
+		}else if(list == "p002") {
+			vo2.setBanana(num2);
+		}else if(list == "p003") {
+			vo3.setHanra(num3);
+		}
+	        return ;
+		}
+	
+	@RequestMapping(value="/productdel")
+	public void handle(SessionStatus s) {
+		s.setComplete(); //세션 객체는 남겨두지만 그 안에 있는 객체는 전부 다 삭제함.
+		return;
+	}
 		
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8");
-		String pid = request.getParameter("pid");
-		HttpSession session = request.getSession();
-		if(session.getAttribute("list") == null) {
-			session.setAttribute("list", new ProductVO());
-		}
-		ProductVO vo = (ProductVO)session.getAttribute("list");
-		if(pid.equals("p001")) {
-			vo.setApple(1);
-		}else if(pid.equals("p002")) {
-			vo.setBanana(1);
-		}else if(pid.equals("p003")) {
-			vo.setHanra(1);
-		} else {
-			session.invalidate();
-			PrintWriter out = response.getWriter();
-			String str = "{\"msg\" : \"장바구니가 비워졌습니다.\"}";
-	        out.print(str);
-	        return;
-		}
-		
-		request.getRequestDispatcher("/jspexam/productView.jsp").
-        forward(request, response);
-
-	}
-
-}
