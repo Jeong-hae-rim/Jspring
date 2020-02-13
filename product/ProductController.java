@@ -19,44 +19,31 @@ import org.springframework.web.bind.support.SessionStatus;
 import vo.ProductVO;
 import vo.CountVO;
 
-@Controller 
-@SessionAttributes({"pid1", "pid2", "pid3"})
+@Controller
+@SessionAttributes({ "psession" })
 public class ProductController {
-	@ModelAttribute("pid1")
-	public ProductVO productMethod1() {	
-		System.out.println("productMethod1 호출 - product1");
+	@ModelAttribute("psession")
+	public ProductVO productMethod1() {
+		System.out.println("productMethod1 호출 - psession");
 		return new ProductVO();
-	}
-	@ModelAttribute("pid2")
-	public ProductVO productMethod2() {	
-		System.out.println("productMethod1 호출 - product2");
-		return new ProductVO();
-	}
-	@ModelAttribute("pid3")
-	public ProductVO productMethod3() {	
-		System.out.println("productMethod1 호출 - product3");
-		return new ProductVO();
-	}
-	
-	@RequestMapping(value="/product")
-	public void handle(@ModelAttribute("p001")ProductVO vo1, 
-		      @ModelAttribute("p002")ProductVO vo2, 
-		      @ModelAttribute("p003")ProductVO vo3, String list, int num1, int num2, int num3) {
-		if(list == "p001") {
-			vo1.setApple(num1);
-		}else if(list == "p002") {
-			vo2.setBanana(num2);
-		}else if(list == "p003") {
-			vo3.setHanra(num3);
-		}
-	        return ;
-		}
-	
-	@RequestMapping(value="/productdel")
-	public void handle(SessionStatus s) {
-		s.setComplete(); //세션 객체는 남겨두지만 그 안에 있는 객체는 전부 다 삭제함.
-		return;
-	}
-		
 	}
 
+	@RequestMapping(value = "/product")
+	public String handle(@ModelAttribute("psession") ProductVO vo, String pid) {
+		if (pid.equals("p001")) {
+			vo.setApple(1);
+		} else if (pid.equals("p002")) {
+			vo.setBanana(1);
+		} else if (pid.equals("p003")) {
+			vo.setHanra(1);
+		}
+		return "productView";
+	}
+
+	@RequestMapping(value = "/productdel")
+	public String handle(SessionStatus s) {
+		s.setComplete(); // 세션 객체는 남겨두지만 그 안에 있는 객체는 전부 다 삭제함.
+		return "productdel";
+	}
+
+}

@@ -11,7 +11,7 @@
 	<h1>선택된 상품 정보는 다음과 같습니다.(스크립트 태그)</h1>
 	<hr>
 	<%
-		ProductVO vo = (ProductVO)session.getAttribute("list");
+		ProductVO vo = (ProductVO)session.getAttribute("psession");
 		if (vo != null) {
 	%>
 	선택된 사과의 갯수 :
@@ -31,23 +31,23 @@
 	
 	<h1>선택된 상품 정보는 다음과 같습니다.(액션 태그)</h1>
 	<hr>
-	<jsp:useBean id="list" class="vo.ProductVO" scope="session" />
+	<jsp:useBean id="psession" class="vo.ProductVO" scope="session" />
 	선택된 사과의 갯수 :
-	<jsp:getProperty name="list" property="apple"/><br>
+	<jsp:getProperty name="psession" property="apple"/><br>
 	선택된 바나나의 갯수 :
-	<jsp:getProperty name="list" property="banana"/><br>
+	<jsp:getProperty name="psession" property="banana"/><br>
 	선택된 한라봉의 갯수 :
-	<jsp:getProperty name="list" property="hanra"/><br>
+	<jsp:getProperty name="psession" property="hanra"/><br>
 	<hr>
 	
 	<h1>선택된 상품 정보는 다음과 같습니다.(표현 언어EL)</h1>
 	<hr>
 	선택된 사과의 갯수 :
-	${sessionScope.list.apple}<br>
+	${sessionScope.psession.apple}<br>
 	선택된 바나나의 갯수 :
-	${sessionScope.list.banana}<br>
+	${sessionScope.psession.banana}<br>
 	선택된 한라봉의 갯수 :
-	${sessionScope.list.hanra}<br>
+	${sessionScope.psession.hanra}<br>
 	
 	<br>
 	<a href='${header.referer}'>상품선택화면</a>
